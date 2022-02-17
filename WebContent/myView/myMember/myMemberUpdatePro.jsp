@@ -29,6 +29,7 @@ if(curlog == null || curlog.trim().equals("")) { //로그인 정보가 없을때
 <% } else { 
 	String mytel = request.getParameter("mytel");
 	String myemail = request.getParameter("myemail");
+	String mypicture = request.getParameter("mypicture");
 	String mypasswd = request.getParameter("mypasswd");
 	
 	MyMemberDao mmd = new MyMemberDao();
@@ -36,6 +37,8 @@ if(curlog == null || curlog.trim().equals("")) { //로그인 정보가 없을때
 	System.out.println(mm);
 	mm.setMytel(mytel);
 	mm.setMyemail(myemail);
+	mm.setMypicture(mypicture);
+	
 	
 	if(mm.getMypasswd().equals(mypasswd)) {
 		

@@ -140,6 +140,7 @@ function PreviewImage() {
       
       <a href="<%=request.getContextPath() %>/myView/myMember/myMemberUpdate.jsp" class="w3-bar-item w3-button"><%=mymemid %>님 회원정보수정</a>
        <a href="<%=request.getContextPath() %>/myView/myMember/myLogout.jsp" class="w3-bar-item w3-button"><i class="fas fa-sign-in-alt"></i>로그아웃</a>
+       <a href="<%=request.getContextPath() %>/myView/myMember/myDeleteForm.jsp" class="w3-bar-item w3-button"><i class="fas fa-sign-in-alt"></i>회원탈퇴</a>
         
       
       
