@@ -47,9 +47,10 @@ function checkPass(myf){
 String curlog = (String)session.getAttribute("mymemberId");
 
 if (curlog==null||curlog.trim().equals("")) { %>
+	<script>
 	alert("로그인이 필요합니다")
-	location.href = "<%=request.getContextPath() %>/myView/myMember/myLoginForm";
-	
+	location.href = "<%=request.getContextPath() %>/myView/myMember/myLoginForm.jsp";
+	</script>
 <% } else { %>
 	
 <!-- passwd confirm start -->
