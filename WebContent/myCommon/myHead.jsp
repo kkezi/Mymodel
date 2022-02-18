@@ -20,7 +20,16 @@ body {
   padding: 10px;
 }
 
-table {
+.sign-up {
+	margin: 7% auto;
+	text-align :center;
+	width : 85%;
+	height:60%;
+	background-color:#EFF0F1; 
+}
+
+
+ table {
   margin: 7% auto;
   text-align:center;
   border: 1px solid #dddddd;
@@ -80,6 +89,11 @@ caption {
  	border:1px solid #dddddd ;
  	border-radius:5px;
 }
+#pass {
+width :90%;
+border:1px solid #dddddd ;
+ 	border-radius:5px;
+}
 
 /* 회원가입 사진추가*/
 .input_image_text{
@@ -124,7 +138,7 @@ function PreviewImage() {
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card" id="myNavbar">
-    <a href="http://localhost:8080/frontPro/html-css/my/eunzi.html" class="w3-bar-item w3-button w3-wide">KIC캠퍼스</a>
+    <a href="<%=request.getContextPath() %>/myView/myMain.jsp" class="w3-bar-item w3-button w3-wide">KIC캠퍼스</a>
     
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
@@ -155,7 +169,7 @@ function PreviewImage() {
       
       <a href="#question" class="w3-bar-item w3-button"><i class="fas fa-envelope"></i> Q n A</a>
       <a href="http://localhost:8080/frontPro/html-css/my/notice.html" class="w3-bar-item w3-button"><i class="fas fa-bullhorn"></i>공지사항</a>
-      <a href="#forum" class="w3-bar-item w3-button"><i class="fas fa-comments"></i>자유게시판</a>
+      <a href="<%=request.getContextPath() %>/myView/myBoard/myList.jsp" class="w3-bar-item w3-button"><i class="fas fa-comments"></i>자유게시판</a>
       <a href="#personal" class="w3-bar-item w3-button"><i class="fas fa-user"></i>마이페이지</a>
       
     </div>  
