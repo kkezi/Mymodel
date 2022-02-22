@@ -168,9 +168,10 @@ function PreviewImage() {
   
       
       
-      <a href="#question" class="w3-bar-item w3-button"><i class="fas fa-envelope"></i> Q n A</a>
-      <a href="http://localhost:8080/frontPro/html-css/my/notice.html" class="w3-bar-item w3-button"><i class="fas fa-bullhorn"></i>공지사항</a>
-      <a href="<%=request.getContextPath() %>/myView/myBoard/myList.jsp" class="w3-bar-item w3-button"><i class="fas fa-comments"></i>자유게시판</a>
+      
+      <a href="<%=request.getContextPath() %>/myView/myBoard/myList.jsp?myboardid=1" class="w3-bar-item w3-button"><i class="fas fa-bullhorn"></i>공지사항</a>
+      <a href="<%=request.getContextPath() %>/myView/myBoard/myList.jsp?myboardid=2" class="w3-bar-item w3-button"><i class="fas fa-comments"></i>자유게시판</a>
+      <a href="<%=request.getContextPath() %>/myView/myBoard/myList.jsp?myboardid=3" class="w3-bar-item w3-button"><i class="fas fa-envelope"></i> Q n A</a>
       <a href="#personal" class="w3-bar-item w3-button"><i class="fas fa-user"></i>마이페이지</a>
       
     </div>  

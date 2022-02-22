@@ -1,6 +1,7 @@
 package myService;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import myModel.MyBoard;
 import myUtil.MyJdbcConnection;
+
 
 public class MyBoardDao {
 	public int insertMyBoard(MyBoard mb) {
@@ -43,7 +45,7 @@ public class MyBoardDao {
 		}
 		
 		return 0;
-	}//end insertMymember1
+	}//end insert
 	
 	
 	
@@ -74,7 +76,7 @@ public class MyBoardDao {
 
 	
 	
-	public List<MyBoard> listMyBoard(int mypageInt, int mylimit, int countmyboard, String myboardid){
+	public List<MyBoard> myBoardList(int mypageInt, int mylimit, int countmyboard, String myboardid){
 		Connection con1 = MyJdbcConnection.getConnection();
 		PreparedStatement pstmt1 = null;
 		ResultSet rs1 = null;
@@ -126,7 +128,9 @@ public class MyBoardDao {
 		
 	}//end list메서드
 	
-	public MyBoard boardMyOne(int mynum) {
+	
+	
+	public MyBoard selectMyBoard(int mynum) {
 		Connection con1 = MyJdbcConnection.getConnection();
 		PreparedStatement pstmt1 = null;
 		String mysql = "select * from myboard where mynum=?";
@@ -140,7 +144,8 @@ public class MyBoardDao {
 				MyBoard mb = new MyBoard();
 						mb.setMynum(rs1.getInt("mynum"));
 						mb.setMywriter(rs1.getString("mywriter"));
-						mb.setMypass(rs1.getString("mysubject"));
+						mb.setMypass(rs1.getString("mypass"));
+						mb.setMysubject(rs1.getString("mysubject"));
 						mb.setMycontent(rs1.getString("mycontent"));
 						mb.setMyfile1(rs1.getString("myfile1"));
 						mb.setMyref(rs1.getInt("myref"));
@@ -161,12 +166,81 @@ public class MyBoardDao {
 		}
 		
 		return null;
-	} //count메서드
+	} //board select 메서드
 	
 	
+	public int updateMyBoard(MyBoard mb) {
+		Connection con1 = MyJdbcConnection.getConnection();
+		PreparedStatement pstmt1 = null;
 		
+		String mysql = "update myboard set mysubject=?, mycontent=?, "
+				+ " myfile1 =? where mynum= ? ";
+		
+		try {
+			pstmt1 = con1.prepareStatement(mysql);
+			pstmt1.setString(1, mb.getMysubject());
+			pstmt1.setString(2, mb.getMycontent());
+			pstmt1.setString(3, mb.getMyfile1());
+			pstmt1.setInt(4, mb.getMynum());
+			
+			return pstmt1.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			MyJdbcConnection.close(con1, pstmt1, null);
+		}
+		
+		
+		
+		return 0;
+	} //update메서드
 	
+		public int deleteMyBoard(int mynum) {
+			
+			Connection con1 = MyJdbcConnection.getConnection();
+			PreparedStatement pstmt1 = null;
+			
+			String mysql = "delete from myboard where mynum = ? ";
+			
+			try {
+				pstmt1 = con1.prepareStatement(mysql);
+				pstmt1.setInt(1, mynum);
+				
+				return pstmt1.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				MyJdbcConnection.close(con1, pstmt1, null);
+			}
+			
+			
+			return 0;
+		}//delete
 	
+		public void readMyCountUp(int mynum) {
+			
+			Connection con1 = MyJdbcConnection.getConnection();
+			PreparedStatement pstmt1 = null;
+			String mysql ="update myboard set myreadcnt = myreadcnt + 1 where mynum =?";
+			
+
+			try {
+				pstmt1 = con1.prepareStatement(mysql);
+
+				pstmt1.setInt(1, mynum);
+				 pstmt1.executeUpdate();
+			
+			} catch (SQLException e){
+				e.printStackTrace();
+			} finally {
+				MyJdbcConnection.close(con1,pstmt1,null);
+			}
+			
+		}//조회수 올리는 메서드
 	
 	
 }//end class

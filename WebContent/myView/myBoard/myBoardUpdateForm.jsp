@@ -13,15 +13,16 @@
 <%
 int mynum = Integer.parseInt(request.getParameter("mynum"));
 MyBoardDao mbd = new MyBoardDao();
-MyBoard mb = mbd.boardMyOne(mynum);
+MyBoard mb = mbd.selectMyBoard(mynum);
 
 %>
 
 <hr>
 <div class = 'mymargin'>
-	<form action = "<%=request.getContextPath() %>/myView/myBoard/myWritePro.jsp" method ="post" enctype = "multipart/form-data" 
+	<form action = "<%=request.getContextPath() %>/myView/myBoard/myBoardUpdatePro.jsp" method ="post" enctype = "multipart/form-data" 
 	name ="myf">
-	
+	<input type="hidden" name=myfile2 value="<%=mb.getMyfile1() %>"  >
+	<input type="hidden" name =mynum value="<%=mb.getMynum() %>" >
 	<table>
 		<caption>게시글 입력</caption>
 		 <tr><td class= "header">작성자:</td>
@@ -33,7 +34,7 @@ MyBoard mb = mbd.boardMyOne(mynum);
 			<td><input type = 'text' name="mysubject" id = "user" size ='10' value ="<%=mb.getMysubject()%>"></td></tr>
 		
 			<tr><td class = "header">내용:</td>
-			<td><textarea rows = "10" cols ="50" name = "mycontent" id="user" value="<%=mb.getMycontent()%>"></textarea></td></tr>
+			<td><textarea rows = "10" cols ="50" name = "mycontent" id="user"><%=mb.getMycontent()%></textarea></td></tr>
 		
 		<tr><td class ="header">파일저장</td>
 		<td><input type='file' name = "myfile1" id="user"></td></tr>

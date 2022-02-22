@@ -1,4 +1,3 @@
-
 <%@page import="myService.MyBoardDao"%>
 <%@page import="myModel.MyBoard"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
@@ -15,42 +14,40 @@
 String mypath = application.getRealPath("/")+"/myboardupload/";
 int mysize = 10*1024*1024;
 MultipartRequest multi1 = new MultipartRequest(request,mypath,mysize,"UTF-8");
-
 MyBoard mb = new MyBoard();
 
-mb.setMywriter(multi1.getParameter("mywriter"));
+mb.setMynum(Integer.parseInt(multi1.getParameter("mynum")));
 mb.setMypass(multi1.getParameter("mypass"));
 mb.setMysubject(multi1.getParameter("mysubject"));
 mb.setMycontent(multi1.getParameter("mycontent"));
 mb.setMyfile1(multi1.getFilesystemName("myfile1"));
-mb.setMyip(request.getLocalAddr());
-
-
-
-
-String myboardid = (String)session.getAttribute("myboardid");
-if(myboardid==null) {
-	myboardid = "1";
-}
-mb.setMyboardid(myboardid);
 
 MyBoardDao mbd = new MyBoardDao();
-int num1 = mbd.insertMyBoard(mb);
 
-String msg = "게시물 등록 실패ㅠㅠ";
-String url = request.getContextPath()+"/myView/myBoard/myWriteForm.jsp";
-if(num1 ==1) {
-	msg = "게시물 등록 성공";
-	url = request.getContextPath()+"/myView/myBoard/myList.jsp";
+if(mb.getMyfile1()==null || mb.getMyfile1().equals(""))	 {
+	mb.setMyfile1(multi1.getParameter("myfile2"));
 }
 
+MyBoard m = mbd.selectMyBoard(mb.getMynum());
 
+String msg = "비밀번호가 다릅니다";
+String url = "myBoardUpdateForm.jsp?mynum="+mb.getMynum();
 
+//비번이 같으면 수정가능 
+if (mb.getMypass().equals(m.getMypass())) {
+	if(mbd.updateMyBoard(mb)>0) {
+		msg="수정완료";
+		url = "myBoardInfo.jsp?mynum="+mb.getMynum();
+	} else {
+		msg = "수정실패";
+	}
+}
 
 %>
-<script>
-alert("<%=msg%>")
-location.href="<%=url%>"
-</script>
 </body>
+<script>
+alert('<%=msg%>');
+location.href = "<%=url%>";
+
+</script>
 </html>

@@ -12,13 +12,37 @@
 <%
 int mynum = Integer.parseInt(request.getParameter("mynum"));
 MyBoardDao mbd = new MyBoardDao();
-MyBoard mb = mbd.boardMyOne(mynum);
+MyBoard mb = mbd.selectMyBoard(mynum); //원래 것 가져오기
+mbd.readMyCountUp(mynum); //조회수
+
+
+
+//myboardid 게시판 여러개 관리 
+String myboardid ="";
+if(request.getParameter("myboardid")!=null) {
+	session.setAttribute("myboardid", request.getParameter("myboardid"));
+	session.setAttribute("mypageNum", "1");
+}
+myboardid = (String)session.getAttribute("myboardid");
+
+if(myboardid == null) {
+	myboardid = "1";
+}
+String myboardName="공지사항";
+switch(myboardid) {
+case "3": myboardName="QnA"; break;
+case "2": myboardName= "자유게시판"; break;
+
+}
+
+
 %>
 
 <hr>
 <div class="mymargin">
-			<h2 id = "center">게시판보기 상세보기</h2>
+			
 			<table >
+			<caption><%=myboardName %></caption>
 			<tr>
 			<th>작성자: </th><td><%=mb.getMywriter() %></td>
 			</tr>
@@ -31,9 +55,11 @@ MyBoard mb = mbd.boardMyOne(mynum);
 			<tr>
 			<th>파일: </th><td><img src = "<%=request.getContextPath() %>/myboardupload/<%=mb.getMyfile1() %>"></td>
 			</tr>
-			<tr><td colspan='2'><button class="btn btn-dark" onclick ="location.href ='<%%>'">답 변</button>
+			<tr><td colspan='2'>
+			<button class="btn btn-dark" onclick ="location.href ='myBoardReplyForm.jsp?mynum=<%=mb.getMynum()%>'">답 변</button>
 			<button class="btn btn-dark" onclick ="location.href ='myBoardUpdateForm.jsp?mynum=<%=mb.getMynum()%>'">수 정</button>
-			<button class="btn btn-dark" onclick ="location.href ='<%%>'">삭 제</button></td></tr>
+			<button class="btn btn-dark" onclick ="location.href ='myBoardDeleteForm.jsp?mynum=<%=mb.getMynum()%>'">삭 제</button>
+			<button class="btn btn-dark" onclick ="location.href ='myList.jsp'">목록으로</button></td></tr>
 			
 			</table>
 			

@@ -18,21 +18,41 @@
 </head>
 <body>
 <%
-String myboardid = "1";
+String myboardid = "";
 int mypageInt = 1;
 int mylimit = 5;
 
-try {
-mypageInt = Integer.parseInt(request.getParameter("mypageNum"));
-} catch (Exception e) {
-	mypageInt = 1;
+//myboardid 게시판 여러개 관리 
+if(request.getParameter("myboardid")!=null) {
+	session.setAttribute("myboardid", request.getParameter("myboardid"));
+	session.setAttribute("mypageNum", "1");
 }
+myboardid = (String)session.getAttribute("myboardid");
+
+if(myboardid == null) {
+	myboardid = "1";
+}
+
+
+
+//mypageNum이 파라미터로 넘어왔을때는 세션으로 저장하기 ---> 글 입력하고 현재 페이지로 오게 하는 것 
+if(request.getParameter("mypageNum")!= null) {
+	session.setAttribute("mypageNum", request.getParameter("mypageNum"));
+}
+String mypageNum = (String)session.getAttribute("mypageNum");
+if(mypageNum==null) {
+	mypageNum="1";
+}
+mypageInt = Integer.parseInt(mypageNum);
+
+
 
 
 MyBoardDao mbd = new MyBoardDao();
 int countmyboard = mbd.countMyBoard(myboardid);
 
-List<MyBoard> list1 = mbd.listMyBoard(mypageInt,mylimit,countmyboard,myboardid);
+
+List<MyBoard> list1 = mbd.myBoardList(mypageInt,mylimit,countmyboard,myboardid);
 
 int myboardnum = countmyboard - mylimit*(mypageInt-1); 
 /*
@@ -47,9 +67,17 @@ int mymaxPage = (countmyboard/mylimit) + (countmyboard % mylimit ==0? 0:1);
 if(myendPage > mymaxPage) myendPage = mymaxPage;
 
 
+String myboardName="공지사항";
+switch(myboardid) {
+case "3": myboardName="QnA"; break;
+case "2": myboardName= "자유게시판"; break;
+
+}
+
 %>
+<hr>
   <div class='mymargin'>
-	<h2 align="center" >자유게시판<%=mypageInt %></h2>
+	<h2 align="center" ><%=myboardName%><%=myboardid %>-<%=mypageInt %></h2>
 	<p align="right"><a href ="<%=request.getContextPath() %>/myView/myBoard/myWriteForm.jsp">게시판입력</a></p>
 	<table>
 		
@@ -93,8 +121,9 @@ if(myendPage > mymaxPage) myendPage = mymaxPage;
   			<a <%if(mystartPage <= mybottomLine){ %> class= "disabledPage" <%} else { %> href="myList.jsp?mypageNum=<%=mystartPage-mybottomLine %>" class="w3-bar-item w3-button"<%}%> >◀</a>
   			<% for(int i = mystartPage; i <= myendPage; i++) { %>
   		     
-  		   	  <a href="myList.jsp?mypageNum=<%=i %>" <%if(i==mypageInt) {%> class = "w3-button w3-gray"<% } else {%> class="w3-button" <%} %> > <%=i %></a>
-
+  		   	<a href="myList.jsp?mypageNum=<%=i %>" <%if(i==mypageInt) {%> class = "w3-button w3-gray"<% } else {%> class="w3-button" <%} %> > <%=i %></a>  
+			 
+			
   		     
   			<%}  %>
   			<a <%if(myendPage>=mymaxPage){ %> class = "disabledPage" <%} else { %> href="myList.jsp?mypageNum=<%=mystartPage+mybottomLine %>" class="w3-button"<%}%> >▶</a>
