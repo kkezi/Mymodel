@@ -8,7 +8,7 @@
 </head>
 <body>
 <!-- login start -->
-	<div class ='login'>
+	<div class ='mymargin'>
 	<form autocomplete ="on" action = "<%=request.getContextPath()%>/myView/myMember/myLoginPro.jsp"> <!-- 저장된 아이디 사용 -->
 		<table>
 		<caption>로그인</caption>

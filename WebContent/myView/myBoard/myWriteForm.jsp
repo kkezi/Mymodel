@@ -8,29 +8,31 @@
 </head>
 <body>
 <hr>
-<div class = 'sign-up'>
+<div class = "mymargin">
 	<form action = "<%=request.getContextPath() %>/myView/myBoard/myWritePro.jsp" method ="post" enctype = "multipart/form-data" 
 	name ="myf">
 	
-	<div class ="sign-up">
-		<h2>게시글 입력</h2>
-		 
-			<label class= "header">작성자:</label>
-			<input type ='text' name="mywriter" id= "user" size ='20'><br>
-			<label class ="header">비밀번호:</label>
-			<input type = 'password' name="mypass" id ="pass" size ='20'><br>
+	<div>
 		
-			<label class ="header">제목:</label>
-			<input type = 'text' name="mysubject" id = "user" size ='10'><br>
+		 <table >
+		 <caption>게시글 입력</caption>
+			<tr><td class= "header">작성자:</td>
+			<td><input type ='text' name="mywriter" id= "user" size ='20'></td></tr>
+			<tr><td class ="header">비밀번호:</td>
+			<td><input type = 'password' name="mypass" id ="pass" size ='20'></td></tr>
 		
-			<label class = "header">내용:</label>
-			<textarea rows = "10" cols ="50" name = "mycontent" id="user"></textarea>
+			<tr><td class ="header">제목:</td>
+			<td><input type = 'text' name="mysubject" id = "user" size ='10'></td></tr>
 		
-		<label class ="header">파일저장</label>
-		<input type='file' name = "myfile1" id="user">
+			<tr><td class = "header">내용:</td>
+			<td><textarea rows = "10" cols ="50" name = "mycontent" id="user"></textarea></td></tr>
 		
+			<tr><td class ="header">파일저장</td>
+			<td><input type='file' name = "myfile1" id="user"></td></tr>
+			<tr><td colspan ='2'> <button type = 'submit'>입 력</button></td></tr>
+		</table>
 		</div>
-		<button type = 'submit'>입 력</button>
+		
 		
 	</form>
 </div>

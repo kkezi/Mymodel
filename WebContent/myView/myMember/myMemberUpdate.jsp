@@ -33,7 +33,7 @@ MyMember mm = mmd.selectMyOne(curlog);
 
 %>
 <hr>
-<div class = 'sign-up'>
+<div class = 'mymargin'>
 	<form action = "<%=request.getContextPath() %>/myView/myMember/myMemberUpdatePro.jsp" method ="post" name="myf" >
 	<input type="hidden" name = "mypicture">
 	<table>

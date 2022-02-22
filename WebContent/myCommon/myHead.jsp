@@ -13,29 +13,30 @@
 body {
   font-family: "Malgun Gothic";
   line-height: 1.8;
+  
+  
+ 
+ 
 }
 
 
 .w3-bar .w3-button {
   padding: 10px;
+  
 }
 
-.sign-up {
-	margin: 7% auto;
-	text-align :center;
-	width : 85%;
-	height:60%;
-	background-color:#EFF0F1; 
+.mymargin {
+margin : 5% 9% 0 9% ; /*위 오른 아래 왼 = 시계방향*/
 }
 
 
  table {
-  margin: 7% auto;
+  margin: 0 auto; /*위아래 양쪽*/
   text-align:center;
   border: 1px solid #dddddd;
   border-collapse: collapse;
-  width: 85%;
-  height: 60%;
+  width: 100%;
+  height: 70%;
   background-color:#EFF0F1; 
 }
 

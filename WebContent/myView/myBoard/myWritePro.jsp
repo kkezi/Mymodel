@@ -22,7 +22,7 @@ mb.setMywriter(multi1.getParameter("mywriter"));
 mb.setMypass(multi1.getParameter("mypass"));
 mb.setMysubject(multi1.getParameter("mysubject"));
 mb.setMycontent(multi1.getParameter("mycontent"));
-mb.setMyfile1(multi1.getParameter("myfile1"));
+mb.setMyfile1(multi1.getFilesystemName("myfile1"));
 mb.setMyip(request.getLocalAddr());
 mb.setMyboardid("1");
 

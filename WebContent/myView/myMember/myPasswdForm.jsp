@@ -54,7 +54,7 @@ if (curlog==null||curlog.trim().equals("")) { %>
 <% } else { %>
 	
 <!-- passwd confirm start -->
-	<div class ='passwd confirm'>
+	<div class ='mymargin'>
 	<form autocomplete ="on" action = "<%=request.getContextPath()%>/myView/myMember/myPasswdPro.jsp" method ="post"
 	name = "myf" onsubmit = "return checkPass(this)"> 
 		<table>

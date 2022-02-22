@@ -57,7 +57,7 @@ function myidChk() {
 </script>
 <body>
 <hr>
-<div class = 'sign-up'>
+<div class = 'mymargin'>
 	<form action = "<%=request.getContextPath() %>/myView/myMember/myMemberPro.jsp" method ="post" 
 	name ="myf" onsubmit = "return inputmyChk()">
 	<input type = "hidden" name = "mypicture">

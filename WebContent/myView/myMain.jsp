@@ -11,7 +11,7 @@
 <hr>
 <h1> main page입니다</h1>
 
-<div class = 'notice'>
+<div class = 'mymargin'>
 	<table>
 	<caption>공지사항</caption>
 		<tr>

@@ -20,7 +20,7 @@ List<MyMember> myli = mmd.myMemberList();
 %>
 
 <body>
-<div class = 'notice'>
+<div class = 'mymargin'>
 	<table>
 	<caption>회원정보</caption>
 		<tr>
