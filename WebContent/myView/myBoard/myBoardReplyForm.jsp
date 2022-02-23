@@ -20,7 +20,7 @@ MyBoard mb = mbd.selectMyBoard(mynum);//원래의 것 가져오기
 
 <hr>
 <div class = "mymargin">
-	<form action = "<%=request.getContextPath() %>/myView/myBoard/myWritePro.jsp" method ="post" enctype = "multipart/form-data" 
+	<form action = "<%=request.getContextPath() %>/myView/myBoard/myBoardReplyPro.jsp" method ="post"  
 	name ="myf">
 	<input type ="hidden" name="mynum" value ="<%=mb.getMynum() %>" >
 	<input type ="hidden" name="myref" value ="<%=mb.getMyref() %>" >
@@ -41,9 +41,8 @@ MyBoard mb = mbd.selectMyBoard(mynum);//원래의 것 가져오기
 			<tr><td class = "header">내용:</td>
 			<td><textarea rows = "10" cols ="50" name = "mycontent" id="user"></textarea></td></tr>
 		
-			<tr><td class ="header">파일저장</td>
-			<td><input type='file' name = "myfile1" id="user"></td></tr>
-			<tr><td colspan ='2'> <button type = 'submit'>입 력</button></td></tr>
+			
+			<tr><td colspan ='2'> <button type = 'submit'>답글 입력</button></td></tr>
 		</table>
 		</div>
 		

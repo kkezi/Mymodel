@@ -15,24 +15,51 @@ import myUtil.MyJdbcConnection;
 
 
 public class MyBoardDao {
+	
+	public int nextMyNum() {
+		Connection con1 = MyJdbcConnection.getConnection();
+		PreparedStatement pstmt1 = null;
+		String mysql = "select myboardseq.nextval from dual";
+		ResultSet rs1 = null;
+		
+		try {
+			pstmt1 = con1.prepareStatement(mysql);
+			rs1 = pstmt1.executeQuery();
+			rs1.next();
+			return rs1.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			MyJdbcConnection.close(con1, pstmt1, rs1);
+		}
+		return 0;
+		
+	}
+	
+	
+	
+	
+	
 	public int insertMyBoard(MyBoard mb) {
 		Connection con1 = MyJdbcConnection.getConnection();
 		PreparedStatement pstmt1 = null;
 		
-		String mysql = "insert into myboard " + " values(boardseq.nextval,?,?,?,?,?,?,sysdate,?,0,?,?,?)";
+		String mysql = "insert into myboard " + " values(?,?,?,?,?,?,?,sysdate,?,0,?,?,?)";
 		
 		try {
 			pstmt1 = con1.prepareStatement(mysql);
-			pstmt1.setString(1, mb.getMywriter());
-			pstmt1.setString(2, mb.getMypass());
-			pstmt1.setString(3, mb.getMysubject());
-			pstmt1.setString(4, mb.getMycontent());
-			pstmt1.setString(5, mb.getMyfile1());
-			pstmt1.setString(6, mb.getMyboardid());
-			pstmt1.setString(7, mb.getMyip());
-			pstmt1.setInt(8, mb.getMyref());
-			pstmt1.setInt(9, mb.getMynum());
-			pstmt1.setInt(10, mb.getMyrefstep());
+			pstmt1.setInt(1, mb.getMynum());
+			pstmt1.setString(2, mb.getMywriter());
+			pstmt1.setString(3, mb.getMypass());
+			pstmt1.setString(4, mb.getMysubject());
+			pstmt1.setString(5, mb.getMycontent());
+			pstmt1.setString(6, mb.getMyfile1());
+			pstmt1.setString(7, mb.getMyboardid());
+			pstmt1.setString(8, mb.getMyip());
+			pstmt1.setInt(9, mb.getMyref());
+			pstmt1.setInt(10, mb.getMyreflevel());
+			pstmt1.setInt(11, mb.getMyrefstep());
 			
 			
 			return pstmt1.executeUpdate();
@@ -84,7 +111,7 @@ public class MyBoardDao {
 		String mysql = "select * from ( "
 				+ " select rownum rnum, b.*from ( "
 				+ " select * from myboard where myboardid = ? "
-				+ " order by mynum desc) b) "
+				+ " order by myref desc, myrefstep asc) b) "
 				+ " where rnum BETWEEN ? AND ? ";
 		try {
 			pstmt1 = con1.prepareStatement(mysql);
@@ -241,6 +268,28 @@ public class MyBoardDao {
 			}
 			
 		}//조회수 올리는 메서드
+		
+		
+		
+		public void myrefStepAdd(int myref, int myrefstep) {
+			Connection con1 = MyJdbcConnection.getConnection();
+			PreparedStatement pstmt1 = null;
+			String mysql ="update myboard set myrefstep = myrefstep +1 where myref =? and myrefstep > ?";
+			
+
+			try {
+				pstmt1 = con1.prepareStatement(mysql);
+				pstmt1.setInt(1, myref);
+				pstmt1.setInt(2, myrefstep);
+				pstmt1.executeUpdate();
+			
+			} catch (SQLException e){
+				e.printStackTrace();
+			} finally {
+				MyJdbcConnection.close(con1,pstmt1,null);
+			}
+			
+		} //end 답글메서드
 	
 	
 }//end class

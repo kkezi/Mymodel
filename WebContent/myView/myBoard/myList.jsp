@@ -98,7 +98,13 @@ case "2": myboardName= "자유게시판"; break;
  		%>
   		<tr>
    			<td><%=myboardnum-- %></td>
-    		<td class ="title"><a href = "myBoardInfo.jsp?mynum=<%=mb.getMynum()%>"><%=mb.getMysubject() %></a></td>
+   			
+    		<td class ="title">
+    		<% if(mb.getMyreflevel() > 0) { %>
+    		<img src = "<%=request.getContextPath() %>/myImage/level.gif" width="<%=7*mb.getMyreflevel()%>">
+    		<img src = "<%=request.getContextPath() %>/myImage/re.gif">
+    		<% } %>
+    		<a href = "myBoardInfo.jsp?mynum=<%=mb.getMynum()%>"><%=mb.getMysubject() %></a></td>
     		<td><%=mb.getMywriter() %></td>
     		<td><%=mb.getMyregdate() %></td>
     		<td><%=mb.getMyfile1() %></td>

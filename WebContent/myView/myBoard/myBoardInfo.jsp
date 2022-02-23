@@ -15,8 +15,6 @@ MyBoardDao mbd = new MyBoardDao();
 MyBoard mb = mbd.selectMyBoard(mynum); //원래 것 가져오기
 mbd.readMyCountUp(mynum); //조회수
 
-
-
 //myboardid 게시판 여러개 관리 
 String myboardid ="";
 if(request.getParameter("myboardid")!=null) {
@@ -34,7 +32,6 @@ case "3": myboardName="QnA"; break;
 case "2": myboardName= "자유게시판"; break;
 
 }
-
 
 %>
 
