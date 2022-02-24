@@ -42,6 +42,9 @@ public class MyBoardDao {
 	
 	
 	public int insertMyBoard(MyBoard mb) {
+		
+		
+		System.out.println(mb);
 		Connection con1 = MyJdbcConnection.getConnection();
 		PreparedStatement pstmt1 = null;
 		

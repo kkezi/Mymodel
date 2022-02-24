@@ -1,4 +1,5 @@
 
+<%@page import="jdk.internal.misc.FileSystemOption"%>
 <%@page import="myService.MyBoardDao"%>
 <%@page import="myModel.MyBoard"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
@@ -35,6 +36,16 @@ if(myboardid==null) {
 mb.setMyboardid(myboardid);
 
 MyBoardDao mbd = new MyBoardDao();
+
+
+
+//새 게시글인 경우 
+mb.setMynum(mbd.nextMyNum());
+
+
+//ref==num으로 만들기
+mb.setMyref(mb.getMynum());
+
 int num1 = mbd.insertMyBoard(mb);
 
 String msg = "게시물 등록 실패ㅠㅠ";
