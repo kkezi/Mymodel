@@ -1,5 +1,4 @@
 
-<%@page import="jdk.internal.misc.FileSystemOption"%>
 <%@page import="myService.MyBoardDao"%>
 <%@page import="myModel.MyBoard"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
