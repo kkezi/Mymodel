@@ -78,7 +78,7 @@ case "2": myboardName= "자유게시판"; break;
 <hr>
   <div class='mymargin'>
 	<h2 align="center" ><%=myboardName%><%=myboardid %>-<%=mypageInt %></h2>
-	<p align="right"><a href ="<%=request.getContextPath() %>/myView/myBoard/myWriteForm.jsp">게시판입력</a></p>
+	<p align="right"><a href ="<%=request.getContextPath() %>/myView/myBoard/myWriteForm.jsp">글쓰기</a></p>
 	<table>
 		
 		<thead>
